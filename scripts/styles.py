@@ -16,6 +16,8 @@ class Styles(ttk.Style) :
 
         self.configure("listen.TButton", font=("@malgun gothic",15), foreground="light sea green", cursor="@hand2", anchor=tk.CENTER)
 
+        self.configure("listen.TLabel", font=("@malgun gothic",15), foreground="light sea green")
+
         self.configure("command-entry.TEntry", relief=tk.FLAT, foreground="light sea green")
 
         self.configure("text_btn.TButton", foreground="light sea green", relief=tk.FLAT, font=("@malgun gothic",15))

@@ -17,6 +17,7 @@ class Root(ThemedTk) :
         self.input_type = "speech"
         self.command = tk.StringVar(value="")
         self.response = tk.StringVar(value="")
+        self.speech_status = tk.StringVar(value="Ready!")
 
     def clear(self) :
         for widget in self.winfo_children() :
@@ -28,7 +29,7 @@ class Root(ThemedTk) :
         label1.grid(row=0, pady=20)
 
         # Frame to enclose the user and pa interchange
-        frame = tk.Frame(self, width=550, height=400)
+        frame = tk.Frame(self, width=550, height=380)
         frame.grid(row=1)
         # User tag and label for command
         user_label = ttk.Label(frame, text="User :", style="name_label.TLabel")
@@ -44,36 +45,45 @@ class Root(ThemedTk) :
         pa_response.place(relx=0.2, rely=0.505)
 
         if self.input_type == "speech" :
+            self.speech_status.set("Ready!")
+            s_label = ttk.Label(self, textvariable=self.speech_status, style="listen.TLabel")
+            s_label.grid(row=2)
             listen_btn = ttk.Button(self, text="Listen", style="listen.TButton", command=lambda: self.listen_btn())
-            listen_btn.grid(row=2, ipadx=20, ipady=5)
+            listen_btn.grid(row=3, ipadx=20, ipady=5)
         
         elif self.input_type == "entrybox" :
             text_frame = tk.Frame(self)
-            text_frame.grid(row=2)
+            text_frame.grid(row=2, sticky="N")
             textbox = ttk.Entry(text_frame, text="Enter your command", style="command-entry.TEntry", font=("@hp simplified jpan", 13))
             textbox.grid(row=0, column=0, pady=10, ipadx=50, ipady=4)
             text_btn = ttk.Button(text_frame, text="Submit", style="text_btn.TButton", command=lambda: self.entry_btn(textbox))
             text_btn.grid(row=0, column=1, ipadx=10, ipady=1, padx=10)
 
         divider = ttk.Separator(self, orient="horizontal")
-        divider.grid(row=3, ipadx=200, pady=10)
+        divider.grid(row=4, ipadx=200, pady=10)
 
         selection_frame = tk.Frame(self)
-        selection_frame.grid(row=4)
+        selection_frame.grid(row=5)
         speech_select = ttk.Button(selection_frame, text="Speech", style="selection.TButton", command=lambda: self.input_change())
         speech_select.grid(row=0, column=0, padx=10)
         text_select = ttk.Button(selection_frame, text="Text Box", style="selection.TButton", command=lambda: self.input_change())
         text_select.grid(row=0, column=1, padx=10)
+        speech_select.configure(state=tk.DISABLED) if self.input_type == "speech" else text_select.configure(state=tk.DISABLED)
 
     def listen_btn(self) :
+        self.speech_status.set("Listening...")
+        self.update()
         command, response = handle.listen()
         self.command.set(command)
         self.response.set(response)
         speech.talk(response)
+        self.speech_status.set("Ready!")
+        self.update()
 
     def entry_btn(self, entry) :
         command = entry.get()
         entry.delete(0, tk.END)
+        self.update()
         command, response = handle.respond(command)
         self.command.set(command)
         self.response.set(response)
