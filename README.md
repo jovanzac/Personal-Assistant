@@ -11,13 +11,30 @@
 - Input can be taken from the user in 2 ways via the gui. Either the user can type into an entry box or there is also an option to accept voice input. The speech recognition part of this project is implemented using the speech_recognition library.
 - The PA responds to the users question/ command using the pyttsx3 library, for text to speech conversion. The PA's response is also displayed on the GUI.
 
-## Contents
+## Setup
+### Contents
 - The scripts directory contains all the python files used in the creation of this program.
 - training.py and yml_to_json.py files are not needed for running the application. training.py was used to make the tensorflow model and yml_to_json.py was used to convert all the conversations(which were obtained in yml format) into json for easier access in the program.
+### Libraries
 - requirements.txt contains all the dependencies. Run the following command in terminal to install all the libraries required to run this program.
 ```
 pip install -r requirements.txt
 ```
+- Make sure that all the following packages are installed
+1. tensorflow
+2. tkinter
+3. tkthemes
+4. json
+5. nltk
+6. speech_recognition
+7. pyttsx3
+### Running it
+To execute the program, run the following:
+```
+python run.py
+```
 
 ## Video Demonstration
 Visit this url: https://youtu.be/FrlzSXRIK3Q
+
+#### NOTE: This application is meant for Windows and has only been tested on Windows10
