@@ -35,6 +35,7 @@ python run.py
 ```
 
 ## Video Demonstration
+[![Alt text for your video](https://img.youtube.com/vi/FrlzSXRIK3Q/0.jpg)](https://youtu.be/FrlzSXRIK3Q)
 Visit this url: https://youtu.be/FrlzSXRIK3Q
 
 #### NOTE: This application is meant for Windows and has only been tested on Windows10
